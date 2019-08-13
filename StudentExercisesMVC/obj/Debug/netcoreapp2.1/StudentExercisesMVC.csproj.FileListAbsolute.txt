@@ -32,3 +32,9 @@ C:\Users\nflem\Workspace\StudentExercisesMVC\StudentExercisesMVC\obj\Debug\netco
 C:\Users\nflem\Workspace\StudentExercisesMVC\StudentExercisesMVC\obj\Debug\netcoreapp2.1\StudentExercisesMVC.csproj.CopyComplete
 C:\Users\nflem\Workspace\StudentExercisesMVC\StudentExercisesMVC\obj\Debug\netcoreapp2.1\Razor\Views\Students\Index.g.cshtml.cs
 C:\Users\nflem\Workspace\StudentExercisesMVC\StudentExercisesMVC\obj\Debug\netcoreapp2.1\Razor\Views\Students\Details.g.cshtml.cs
+C:\Users\nflem\Workspace\StudentExercisesMVC\StudentExercisesMVC\obj\Debug\netcoreapp2.1\Razor\Views\Students\Create.g.cshtml.cs
+C:\Users\nflem\Workspace\StudentExercisesMVC\StudentExercisesMVC\obj\Debug\netcoreapp2.1\Razor\Views\Cohorts\Index.g.cshtml.cs
+C:\Users\nflem\Workspace\StudentExercisesMVC\StudentExercisesMVC\obj\Debug\netcoreapp2.1\Razor\Views\Cohorts\Details.g.cshtml.cs
+C:\Users\nflem\Workspace\StudentExercisesMVC\StudentExercisesMVC\obj\Debug\netcoreapp2.1\Razor\Views\Cohorts\Create.g.cshtml.cs
+C:\Users\nflem\Workspace\StudentExercisesMVC\StudentExercisesMVC\obj\Debug\netcoreapp2.1\Razor\Views\Cohorts\Edit.g.cshtml.cs
+C:\Users\nflem\Workspace\StudentExercisesMVC\StudentExercisesMVC\obj\Debug\netcoreapp2.1\Razor\Views\Cohorts\Delete.g.cshtml.cs
