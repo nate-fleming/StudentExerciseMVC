@@ -43,3 +43,5 @@ C:\Users\nflem\Workspace\StudentExercisesMVC\StudentExercisesMVC\obj\Debug\netco
 C:\Users\nflem\Workspace\StudentExercisesMVC\StudentExercisesMVC\obj\Debug\netcoreapp2.1\Razor\Views\Instructors\Create.g.cshtml.cs
 C:\Users\nflem\Workspace\StudentExercisesMVC\StudentExercisesMVC\obj\Debug\netcoreapp2.1\Razor\Views\Instructors\Edit.g.cshtml.cs
 C:\Users\nflem\Workspace\StudentExercisesMVC\StudentExercisesMVC\obj\Debug\netcoreapp2.1\Razor\Views\Instructors\Delete.g.cshtml.cs
+C:\Users\nflem\Workspace\StudentExercisesMVC\StudentExercisesMVC\obj\Debug\netcoreapp2.1\Razor\Views\Students\Edit.g.cshtml.cs
+C:\Users\nflem\Workspace\StudentExercisesMVC\StudentExercisesMVC\obj\Debug\netcoreapp2.1\Razor\Views\Students\Delete.g.cshtml.cs
