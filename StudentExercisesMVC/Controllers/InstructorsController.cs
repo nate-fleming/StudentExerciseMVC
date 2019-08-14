@@ -232,6 +232,7 @@ namespace StudentExercisesMVC.Controllers
                     using (SqlCommand cmd = conn.CreateCommand())
                     {
                         cmd.CommandText = @"
+                                    DELETE FROM StudentExercise WHERE InstructorId = @id
                                     DELETE FROM Instructor WHERE Id = @id";
 
                         cmd.Parameters.Add(new SqlParameter("@id", id));
