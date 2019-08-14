@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.Extensions.Configuration;
 using StudentExercises.Models.ViewModels;
 using StudentExercisesMVC.Models;
+using StudentExercisesMVC.Models.ViewModels;
 
 namespace StudentExercisesMVC.Controllers
 {
@@ -139,6 +140,48 @@ namespace StudentExercisesMVC.Controllers
             {
                 return View();
             }
+        }
+
+        public ActionResult AddExercise(int id)
+        {
+            var viewModel = new StudentAddExerciseViewModel();
+
+            var student = GetOneStudent(id);
+            var instructors = GetAllInstructors();
+            var iselectItems = instructors
+                .Select(instructor => new SelectListItem
+                {
+                    Text = instructor.FullName,
+                    Value = instructor.Id.ToString()
+                })
+                .ToList();
+
+            iselectItems.Insert(0, new SelectListItem
+            {
+                Text = "Choose instructor...",
+                Value = "0"
+            });
+
+            var exercises = GetAllExercises();
+            var eselectItems = exercises
+                .Select(exercise => new SelectListItem
+                {
+                    Text = exercise.Name,
+                    Value = exercise.Id.ToString()
+                })
+                .ToList();
+
+            eselectItems.Insert(0, new SelectListItem
+            {
+                Text = "Choose exercise...",
+                Value = "0"
+            });
+
+            viewModel.Exercises = eselectItems;
+            viewModel.Student = student;
+            viewModel.Instructors = iselectItems;
+
+            return View(viewModel);
         }
 
         // GET: Students/Edit/5
@@ -305,6 +348,77 @@ namespace StudentExercisesMVC.Controllers
                 }
             }
             return(student);
+        }
+
+        private List<Instructor> GetAllInstructors()
+        {
+            List<Instructor> instructors = new List<Instructor>();
+
+            using (SqlConnection conn = Connection)
+            {
+                conn.Open();
+                using (SqlCommand cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @"
+                        SELECT Id, FirstName, LastName, SlackHandle, Specialty, CohortId
+                        FROM Instructor
+                        ";
+
+                    SqlDataReader reader = cmd.ExecuteReader();
+
+
+
+                    while (reader.Read())
+                    {
+                        instructors.Add(new Instructor()
+                        {
+                            Id = reader.GetInt32(reader.GetOrdinal("Id")),
+                            FirstName = reader.GetString(reader.GetOrdinal("FirstName")),
+                            LastName = reader.GetString(reader.GetOrdinal("LastName")),
+                            SlackHandle = reader.GetString(reader.GetOrdinal("SlackHandle")),
+                            Specialty = reader.GetString(reader.GetOrdinal("Specialty")),
+                            CohortId = reader.GetInt32(reader.GetOrdinal("CohortId")),
+                        });
+                    }
+
+                    reader.Close();
+                }
+            }
+
+            return instructors;
+        }
+
+        private List<Exercise> GetAllExercises()
+        {
+            List<Exercise> exercises = new List<Exercise>();
+
+            using (SqlConnection conn = Connection)
+            {
+                conn.Open();
+                using (SqlCommand cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @"
+                        SELECT Id, [Name], Language
+                        FROM Exercise
+                        ";
+
+                    SqlDataReader reader = cmd.ExecuteReader();
+
+                    while (reader.Read())
+                    {
+                        exercises.Add(new Exercise()
+                        {
+                            Id = reader.GetInt32(reader.GetOrdinal("Id")),
+                            Name = reader.GetString(reader.GetOrdinal("Name")),
+                            Language = reader.GetString(reader.GetOrdinal("Language"))
+                        });
+                    }
+
+                    reader.Close();
+                }
+            }
+
+            return (exercises);
         }
     }
 }

@@ -40,11 +40,14 @@
     <tbody>
         @foreach (var instructor in Model.Instructors)
         {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => instructor.FullName)
-                </td>
-            </tr>
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => instructor.FullName)
+            </td>
+            <td>
+                <a asp-controller="Instructors" asp-action="Details" asp-route-id="@instructor.Id">Details</a>
+            </td>
+        </tr>
         }
     </tbody>
 </table>
