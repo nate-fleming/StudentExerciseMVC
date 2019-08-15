@@ -30,6 +30,8 @@ namespace StudentExercisesMVC.Models
         [Display(Name = "Cohort Id")]
         public int CohortId { get; set; }
 
+        public List<Exercise> Exercises { get; set; }
+
 
         //Computed Property
         [Display(Name = "Full Name")]

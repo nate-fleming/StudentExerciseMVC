@@ -39,6 +39,32 @@
         </dd>
     </dl>
 </div>
+<h4>Student Exercises</h4>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                <p>Name</p>
+            </th>
+            <th>
+                <p>Language</p>
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Exercises)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Language)
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
 <div>
     @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
     <a asp-action="Index">Back to List</a>

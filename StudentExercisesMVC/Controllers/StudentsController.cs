@@ -72,7 +72,10 @@ namespace StudentExercisesMVC.Controllers
         // GET: Students/Details/5
         public ActionResult Details(int id)
         {
+            var exercises = GetStudentExercises(id);
+
             var student = GetOneStudent(id);
+            student.Exercises = exercises;
             return View(student);
         }
 
@@ -220,7 +223,7 @@ namespace StudentExercisesMVC.Controllers
 
                 return RedirectToAction(nameof(Index));
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 return View();
             }
@@ -312,7 +315,7 @@ namespace StudentExercisesMVC.Controllers
                                     DELETE FROM StudentExercise WHERE StudentId = @id
                                     DELETE FROM Student WHERE Id = @id
                                      ";
-                                    
+
 
                         cmd.Parameters.Add(new SqlParameter("@id", id));
                         cmd.ExecuteNonQuery();
@@ -389,7 +392,7 @@ namespace StudentExercisesMVC.Controllers
                     reader.Close();
                 }
             }
-            return(student);
+            return (student);
         }
 
         private List<Instructor> GetAllInstructors()
@@ -444,6 +447,43 @@ namespace StudentExercisesMVC.Controllers
                         FROM Exercise
                         ";
 
+                    SqlDataReader reader = cmd.ExecuteReader();
+
+                    while (reader.Read())
+                    {
+                        exercises.Add(new Exercise()
+                        {
+                            Id = reader.GetInt32(reader.GetOrdinal("Id")),
+                            Name = reader.GetString(reader.GetOrdinal("Name")),
+                            Language = reader.GetString(reader.GetOrdinal("Language"))
+                        });
+                    }
+
+                    reader.Close();
+                }
+            }
+
+            return (exercises);
+        }
+
+        public List<Exercise> GetStudentExercises(int id)
+        {
+            List<Exercise> exercises = new List<Exercise>();
+
+            using (SqlConnection conn = Connection)
+            {
+                conn.Open();
+                using (SqlCommand cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @"
+                        SELECT e.Name, e.[Language], e.Id 
+                        FROM StudentExercise se
+                        LEFT JOIN Student s ON s.Id = se.StudentId
+                        LEFT JOIN Exercise e ON e.Id = se.ExerciseId
+                        WHERE se.StudentId = @id
+                        ";
+
+                    cmd.Parameters.Add(new SqlParameter("@id", id));
                     SqlDataReader reader = cmd.ExecuteReader();
 
                     while (reader.Read())
