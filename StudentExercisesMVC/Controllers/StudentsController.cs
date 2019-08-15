@@ -142,6 +142,7 @@ namespace StudentExercisesMVC.Controllers
             }
         }
 
+        //GET
         public ActionResult AddExercise(int id)
         {
             var viewModel = new StudentAddExerciseViewModel();
@@ -182,6 +183,47 @@ namespace StudentExercisesMVC.Controllers
             viewModel.Instructors = iselectItems;
 
             return View(viewModel);
+        }
+
+        //CREATE
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult AddExercise(int id, StudentExercise table)
+        {
+            try
+            {
+                using (SqlConnection conn = Connection)
+                {
+                    conn.Open();
+
+                    using (SqlCommand cmd = conn.CreateCommand())
+                    {
+                        cmd.CommandText = @"
+                                   INSERT INTO StudentExercise (
+                                   ExerciseId,
+                                   StudentId,
+                                   InstructorId
+                                  )  Values (
+                                    @studentId,
+                                    @exerciseId,
+                                    @instructorId
+                                   )
+                                ";
+
+                        cmd.Parameters.AddWithValue("@studentId", id);
+                        cmd.Parameters.AddWithValue("@exerciseId", table.ExerciseId);
+                        cmd.Parameters.AddWithValue("@instructorId", table.InstructorId);
+
+                        cmd.ExecuteNonQuery();
+                    }
+                }
+
+                return RedirectToAction(nameof(Index));
+            }
+            catch(Exception ex)
+            {
+                return View();
+            }
         }
 
         // GET: Students/Edit/5
