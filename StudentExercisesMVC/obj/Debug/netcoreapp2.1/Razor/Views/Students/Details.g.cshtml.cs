@@ -65,7 +65,7 @@ using StudentExercisesMVC.Models;
             WriteLiteral("\r\n<h2>Details</h2>\r\n\r\n<div>\r\n    <h4>Student</h4>\r\n    <p>\r\n        ");
             EndContext();
             BeginContext(156, 95, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "30ebb211a1a94311986098faef968d23", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "4882c24163974d4ea95ab9a503397793", async() => {
                 BeginContext(235, 12, true);
                 WriteLiteral("Add Exercise");
                 EndContext();
@@ -192,7 +192,7 @@ Write(Html.ActionLink("Edit", "Edit", new { id = Model.Id }));
             WriteLiteral(" |\r\n    ");
             EndContext();
             BeginContext(1082, 38, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "5acde9a8e0964550a20866e27833fbe5", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "1390278b00204c7c93117627e9448524", async() => {
                 BeginContext(1104, 12, true);
                 WriteLiteral("Back to List");
                 EndContext();
