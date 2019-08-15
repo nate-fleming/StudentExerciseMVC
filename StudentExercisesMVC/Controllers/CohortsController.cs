@@ -83,7 +83,7 @@ namespace StudentExercisesMVC.Controllers
 
                     if (reader.Read())
                     {
-                        cohort = new Cohort 
+                        cohort = new Cohort
                         {
                             Id = reader.GetInt32(reader.GetOrdinal("Id")),
                             Name = reader.GetString(reader.GetOrdinal("Name"))
@@ -187,8 +187,9 @@ namespace StudentExercisesMVC.Controllers
         public ActionResult DeleteConfirmed(int id)
         {
             var students = GetAllStudents();
+            var instructors = GetAllInstructors();
 
-            if (students.Any(student => student.CohortId == id))
+            if (students.Any(student => student.CohortId == id) && instructors.Any(instructor => instructor.CohortId == id))
             {
                 return RedirectToAction(nameof(Index));
             }
@@ -290,6 +291,44 @@ namespace StudentExercisesMVC.Controllers
             }
 
             return students;
+        }
+
+        private List<Instructor> GetAllInstructors()
+        {
+            List<Instructor> instructors = new List<Instructor>();
+
+            using (SqlConnection conn = Connection)
+            {
+                conn.Open();
+                using (SqlCommand cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @"
+                        SELECT Id, FirstName, LastName, SlackHandle, Specialty, CohortId
+                        FROM Instructor
+                        ";
+
+                    SqlDataReader reader = cmd.ExecuteReader();
+
+
+
+                    while (reader.Read())
+                    {
+                        instructors.Add(new Instructor()
+                        {
+                            Id = reader.GetInt32(reader.GetOrdinal("Id")),
+                            FirstName = reader.GetString(reader.GetOrdinal("FirstName")),
+                            LastName = reader.GetString(reader.GetOrdinal("LastName")),
+                            SlackHandle = reader.GetString(reader.GetOrdinal("SlackHandle")),
+                            Specialty = reader.GetString(reader.GetOrdinal("Specialty")),
+                            CohortId = reader.GetInt32(reader.GetOrdinal("CohortId")),
+                        });
+                    }
+
+                    reader.Close();
+                }
+            }
+
+            return instructors;
         }
     }
 }
